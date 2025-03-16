@@ -1,0 +1,64 @@
+#include <stdio.h>
+
+#define TAMANHO 10
+#define NAVIOS 3
+#define TAMANHO_NAVIO 3
+
+char tabuleiro[TAMANHO][TAMANHO];
+
+// Função para inicializar o tabuleiro com água ('~')
+void inicializarTabuleiro() {
+    for (int i = 0; i < TAMANHO; i++) {
+        for (int j = 0; j < TAMANHO; j++) {
+            tabuleiro[i][j] = '~';
+        }
+    }
+}
+
+// Função para posicionar os navios fixos no tabuleiro
+void posicionarNavios() {
+    int naviosPredefinidos[NAVIOS][2] = {
+        {2, 2},  // Primeiro navio inicia em (2,2)
+        {5, 5},  // Segundo navio inicia em (5,5)
+        {7, 1}   // Terceiro navio inicia em (7,1)
+    };
+
+    for (int i = 0; i < NAVIOS; i++) {
+        int x = naviosPredefinidos[i][0];
+        int y = naviosPredefinidos[i][1];
+
+        // Coloca o navio horizontalmente
+        for (int j = 0; j < TAMANHO_NAVIO; j++) {
+            if (y + j < TAMANHO) {
+                tabuleiro[x][y + j] = 'N';
+            }
+        }
+    }
+}
+
+// Função para imprimir o tabuleiro
+void imprimirTabuleiro() {
+    printf("  ");
+    for (int i = 0; i < TAMANHO; i++) {
+        printf("%d ", i);
+    }
+    printf("\n");
+
+    for (int i = 0; i < TAMANHO; i++) {
+        printf("%d ", i);
+        for (int j = 0; j < TAMANHO; j++) {
+            printf("%c ", tabuleiro[i][j]);
+        }
+        printf("\n");
+    }
+}
+
+int main() {
+    inicializarTabuleiro();
+    posicionarNavios();
+    
+    printf("Tabuleiro com navios posicionados:\n");
+    imprimirTabuleiro();
+
+    return 0;
+}
